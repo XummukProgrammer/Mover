@@ -43,13 +43,9 @@ namespace Mover
             var ray = new Ray(_view.Head.position, _view.Head.forward);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Debug.Log(hit.collider.name);
-
                 if (hit.collider.TryGetComponent(out ObjectUsed used))
                 {
                     Target = used;
-
-                    Debug.Log(Target.name);
                 }
             }
         }

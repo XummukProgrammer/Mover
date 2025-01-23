@@ -7,6 +7,7 @@ namespace Mover
         public override void InstallBindings()
         {
             InstallGameStates();
+            InstallMisc();
         }
 
         private void InstallGameStates()
@@ -17,5 +18,10 @@ namespace Mover
             Container.Bind<GameStateMoving>().AsSingle();
             Container.Bind<GameStateEnding>().AsSingle();
         }
+
+        private void InstallMisc()
+        {
+            Container.BindInterfacesAndSelfTo<Inventory>().AsSingle().NonLazy();
+        }    
     }
 }

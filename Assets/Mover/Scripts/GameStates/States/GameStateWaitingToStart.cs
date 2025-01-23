@@ -9,6 +9,8 @@ namespace Mover
         public void OnEnter()
         {
             Debug.Log("GameStateWaitingToStart");
+
+            NextState = GameStates.States.Moving;
         }
 
         public void OnExit()
