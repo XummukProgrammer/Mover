@@ -6,8 +6,11 @@ namespace Mover
     {
         [SerializeField] private Vector3 _offset;
         [SerializeField] private float _speed;
+        [SerializeField] private Camera _camera;
 
         private GameObject _container; // Container for our camera
+
+        public Camera Camera => _camera;
 
         public Transform Target
         {
