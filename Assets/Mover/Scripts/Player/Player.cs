@@ -45,11 +45,15 @@ namespace Mover
         private void MovementLogic()
         {
             _view.AddForce(MoveVector);
+
+            MoveVector = Vector2.zero;
         }
 
         private void RotateLogic()
         {
             _view.Rotate(RotateVector);
+
+            RotateVector = Vector2.zero;
         }
     }
 }

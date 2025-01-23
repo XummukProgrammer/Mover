@@ -22,6 +22,12 @@ namespace Mover
         private void InstallMisc()
         {
             Container.BindInterfacesAndSelfTo<Inventory>().AsSingle().NonLazy();
-        }    
+        }
+
+        [System.Serializable]
+        public class Settings
+        {
+            public bool IsAndroid;
+        }
     }
 }

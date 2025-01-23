@@ -4,9 +4,24 @@ namespace Mover
 {
     public class PlayerInstaller : MonoInstaller
     {
+        private GameInstaller.Settings _gameSettings;
+
+        [Inject]
+        public void Construct(GameInstaller.Settings gameSettings)
+        {
+            _gameSettings = gameSettings;
+        }
+
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerDesktopInput>().AsSingle();
+            if (!_gameSettings.IsAndroid)
+            {
+                Container.BindInterfacesAndSelfTo<PlayerDesktopInput>().AsSingle();
+            }
+            else
+            {
+                Container.BindInterfacesAndSelfTo<PlayerAndroidInput>().AsSingle();
+            }
 
             Container.BindInterfacesAndSelfTo<PlayerMoveHandler>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerRotateHandler>().AsSingle().NonLazy();
