@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Mover
 {
@@ -33,13 +34,27 @@ namespace Mover
         [SerializeField]
         private Button _useButton;
 
+        private GameInstaller.Settings _gameSettings;
+
         public event Action<Vector2> MovePressed;
         public event Action<Vector2> RotatePressed;
         public event Action UsePressed;
         public event Action DropPressed;
 
+        [Inject]
+        public void Construct(GameInstaller.Settings gameSettings)
+        {
+            _gameSettings = gameSettings;
+        }
+
         private void Start()
         {
+            if (!_gameSettings.IsAndroid)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
             _useButton.onClick.AddListener(() =>
             {
                 UsePressed?.Invoke();
@@ -58,6 +73,11 @@ namespace Mover
 
         private void OnDestroy()
         {
+            if (!_gameSettings.IsAndroid)
+            {
+                return;
+            }
+
             _moveForwardButton.Clicking -= OnMoveForwardClicking;
             _moveLeftButton.Clicking -= OnMoveLeftClicking;
             _moveRightButton.Clicking -= OnMoveRightClicking;
