@@ -32,7 +32,7 @@ namespace Mover
                 var item = _inventory.GetItem(itemId);
                 if (item != null)
                 {
-                    if (item.Value < 0)
+                    if (item.Value <= 0)
                     {
                         return;
                     }
